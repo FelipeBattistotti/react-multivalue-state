@@ -1,8 +1,76 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
+/**
+ * Entity 1 Attributes
+ */
+export enum EAttributeE1 {
+  A1 = "attribute1Entity1",
+  A2 = "attribute2Entity1",
+  A3 = "attribute3Entity1",
+  A4 = "attribute4Entity1",
+  A5 = "attribute5Entity1",
+  A6 = "attribute6Entity1",
+  A7 = "attribute7Entity1",
+  A8 = "attribute8Entity1"
+}
+
+/**
+ * Entity 2 Attributes
+ */
+export enum EAttributeE2 {
+  A1 = "attribute1Entity2",
+  A2 = "attribute2Entity2",
+  A3 = "attribute3Entity2",
+  A4 = "attribute4Entity2",
+  A5 = "attribute5Entity2",
+  A6 = "attribute6Entity2",
+  A7 = "attribute7Entity2",
+  A8 = "attribute8Entity2"
+}
+
 const Home: NextPage = () => {
+
+  const attributesExtended = {
+    ['ext1']: '',
+    ['ext2']: ''
+  }
+
+  const attributesExtended2 = {
+    ['teste1']: ''
+  }
+
+  const attributes = {
+    ...attributesExtended,
+    [EAttributeE1.A1]: '',
+    [EAttributeE1.A2]: '',
+    [EAttributeE1.A3]: '',
+    [EAttributeE1.A4]: '',
+    [EAttributeE2.A1]: '',
+    [EAttributeE2.A2]: '',
+    [EAttributeE2.A3]: '',
+    [EAttributeE2.A4]: ''
+  }
+
+  const [specificState, setSpecificState] = useState({ ...attributes, ...attributesExtended2 })
+
+  useEffect(() => {
+    firstProcess()
+  }, [])
+
+  const firstProcess = () => {
+    setSpecificState({
+      ...specificState,
+      [EAttributeE1.A1]: 'TESTE 1 - x',
+      [EAttributeE1.A2]: 'TESTE 2 - xx',
+      [EAttributeE2.A1]: '2a',
+      [EAttributeE2.A2]: '2b',
+      ['ext1']: 'multi valor estendido 1',
+      'teste1': 'multi valor estendido 2'
+    })
+  }
+
   return (
     <>
       <Head>
@@ -12,7 +80,26 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <div></div>
+        <div>
+          <p>
+            {specificState[EAttributeE1.A1]}
+          </p>
+          <p>
+            {specificState[EAttributeE1.A2]}
+          </p>
+          <p>
+            {specificState[EAttributeE2.A1]}
+          </p>
+          <p>
+            {specificState[EAttributeE2.A2]}
+          </p>
+          <p style={{ fontWeight: 'bolder', fontSize: '20px' }}>
+            {specificState['ext1']}
+          </p>
+          <p style={{ fontWeight: 'bolder', fontSize: '20px', color: 'yellowgreen' }}>
+            {specificState['teste1']}
+          </p>
+        </div>
       </main>
     </>
   )
