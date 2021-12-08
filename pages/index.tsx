@@ -53,7 +53,8 @@ const Home: NextPage = () => {
     [EAttributeE2.A4]: ''
   }
 
-  const [specificState, setSpecificState] = useState({ ...attributes, ...attributesExtended2 })
+  const [specificState_1, setSpecificState_1] = useState({ ...attributesExtended2 })
+  const [specificState, setSpecificState] = useState({ ...attributes, ...specificState_1 })
 
   useEffect(() => {
     firstProcess()
